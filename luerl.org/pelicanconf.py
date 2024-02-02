@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'BEAM Community'
 SITENAME = 'Luerl: Lua in Erlang'
-#SITEURL = 'https://luerl.org'
-SITEURL = ''
+SITEURL = 'https://luerl.org'
 
 # Categories
 USE_FOLDER_AS_CATEGORY = True
@@ -95,8 +94,3 @@ SITEMAP = {
         'indexes': 'daily'
     },
 }
-
-## Github URL for fork ribbon
-## Only used on theme site, not personal blog
-#GITHUB_URL = 'https://github.com/spacebeam'
-#GITHUB_POSITION = 'left'
