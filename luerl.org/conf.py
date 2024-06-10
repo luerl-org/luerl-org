@@ -16,16 +16,16 @@ import time
 
 
 # Data about this site
-BLOG_AUTHOR = "Team Lua"  # (translatable)
-BLOG_TITLE = "Luerl: Lua in Erlang"  # (translatable)
+BLOG_AUTHOR = "The BEAM Comunity"  # (translatable)
+BLOG_TITLE = "Luerl"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
 SITE_URL = "https://luerl.org/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "https://luerl.org/"
-BLOG_EMAIL = "hello@luerl.org"
-BLOG_DESCRIPTION = "Luerl is an Erlang implementation of Standard Lua 5.3"  # (translatable)
+BASE_URL = "https://luerl.org/"
+BLOG_EMAIL = "info@luerl.org"
+BLOG_DESCRIPTION = "Lua in Erlang"  # (translatable)
 
 # Nikola is multilingual!
 #
@@ -101,6 +101,8 @@ DEFAULT_LANG = "en"
 # the path will be used as a prefix for the generated pages location
 TRANSLATIONS = {
     DEFAULT_LANG: "",
+    #"ko": "./ko",
+    #"es": "./es",
     # Example for another language:
     # "es": "./es",
 }
@@ -140,28 +142,42 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 #          with a ``/``, otherwise end them with ``/index.html`` — or
 #          else they won’t be highlighted when active.
 
-NAVIGATION_LINKS = {
-    DEFAULT_LANG: (
-        ("/archive.html", "Archive"),
-        ("/categories/", "Tags"),
-        ("/rss.xml", "RSS feed"),
-    ),
-}
 
 # Alternative navigation links. Works the same way NAVIGATION_LINKS does,
 # although themes may not always support them. (translatable)
 # (Bootstrap 4: right-side of navbar, Bootblog 4: right side of title)
 NAVIGATION_ALT_LINKS = {
-    DEFAULT_LANG: ()
+    DEFAULT_LANG: (
+        ("/posts/", "Blog"),
+        ("https://github.com/rvirding/luerl", "Try Luerl"),
+    ),
 }
 
-# Name of the theme to use.
-THEME = "bootblog4"
+#INDEX_READ_MORE_LINK = '<a class="button is-link" href="{link}" style="height:28px"> {read_more} <span class="icon is-small"> <i class="fa fa-angle-double-right"></i></span></a>'
+#NAVIGATION_LINKS = {
+#    DEFAULT_LANG: (
+#        ("/pages/about/", "fa fa-info"),
+#        ("/pages/technology/", "fa fa-bug"),
+#        ("/pages/research/", "fa fa-cube"),
+#        ("/categories/", "fa fa-tags"),
+#        ("http://github.com/spacebeam", "fa fa-github"),
+#    ),
+#}
 
+NAVIGATION_LINKS = {
+    DEFAULT_LANG: (
+        ("/install/", "Install"),
+        ("/docs/", "Docs"),
+        ("/community/", "Community"),
+
+    ),
+}
+# Name of the theme to use.
+THEME = "zerg"
 # A theme color. In default themes, it might be displayed by some browsers as
 # the browser UI color (eg. Chrome on Android). Other themes might also use it
 # as an accent color (the default ones don’t). Must be a HEX value.
-THEME_COLOR = '#5670d4'
+#THEME_COLOR = '#5670d4'
 
 # Theme configuration. Fully theme-dependent. (translatable)
 # Samples for bootblog4 (enabled) and bootstrap4 (commented) follow.
@@ -170,36 +186,21 @@ THEME_COLOR = '#5670d4'
 # bootstrap4 supports: navbar_light (defaults to False)
 #                      navbar_custom_bg (defaults to '')
 
-# Config for bootblog4:
+# Config for bootstrap4:
 THEME_CONFIG = {
-    DEFAULT_LANG: {
-        # Show the latest featured post in a large box, with the previewimage as its background.
-        'featured_large': False,
-        # Show the first (remaining) two featured posts in small boxes.
-        'featured_small': False,
-        # Show featured posts on mobile.
-        'featured_on_mobile': True,
-        # Show image in `featured_large` on mobile.
-        # `featured_small` displays them only on desktop.
-        'featured_large_image_on_mobile': True,
-        # Strip HTML from featured post text.
-        'featured_strip_html': False,
-        # Contents of the sidebar, If empty, the sidebar is not displayed.
-        'sidebar': ''
+     DEFAULT_LANG: {
+         # Use a light navbar with dark text. Defaults to False.
+         'navbar_light': False,
+         # Use a custom navbar color. If unset, 'navbar_light' sets text +
+         # background color. If set, navbar_light controls only background
+         # color. Supported values: bg-dark, bg-light, bg-primary, bg-secondary,
+         # bg-success, bg-danger, bg-warning, bg-info, bg-white, bg-transparent.
+         'navbar_custom_bg': '',
     }
 }
-# Config for bootstrap4:
-# THEME_CONFIG = {
-#     DEFAULT_LANG: {
-#         # Use a light navbar with dark text. Defaults to False.
-#         'navbar_light': False,
-#         # Use a custom navbar color. If unset, 'navbar_light' sets text +
-#         # background color. If set, navbar_light controls only background
-#         # color. Supported values: bg-dark, bg-light, bg-primary, bg-secondary,
-#         # bg-success, bg-danger, bg-warning, bg-info, bg-white, bg-transparent.
-#         'navbar_custom_bg': '',
-#     }
-# }
+
+# Create 403 and 404 error pages
+CREATE_HTTP_ERROR_PAGES = [404]
 
 # POSTS and PAGES contains (wildcard, destination, template) tuples.
 # (translatable)
@@ -238,14 +239,12 @@ THEME_CONFIG = {
 POSTS = (
     ("posts/*.rst", "posts", "post.tmpl"),
     ("posts/*.md", "posts", "post.tmpl"),
-    ("posts/*.txt", "posts", "post.tmpl"),
     ("posts/*.html", "posts", "post.tmpl"),
 )
 PAGES = (
-    ("pages/*.rst", "pages", "page.tmpl"),
-    ("pages/*.md", "pages", "page.tmpl"),
-    ("pages/*.txt", "pages", "page.tmpl"),
-    ("pages/*.html", "pages", "page.tmpl"),
+    ("pages/*.html", "", "page.tmpl"),
+    ("pages/*.rst", "", "page.tmpl"),
+    ("pages/*.md", "", "page.tmpl"),
 )
 
 
@@ -258,7 +257,7 @@ PAGES = (
 # (e.g. 'Europe/Zurich')
 # Also, if you want to use a different time zone in some of your posts,
 # you can use the ISO 8601/RFC 3339 format (ex. 2012-03-30T23:00:00+02:00)
-TIMEZONE = "US/Central"
+TIMEZONE = "America/Costa_Rica"
 
 # If you want to use ISO 8601 (also valid RFC 3339) throughout Nikola
 # (especially in new_post), set this to True.
@@ -312,18 +311,10 @@ TIMEZONE = "US/Central"
 # 'markdown' is Markdown
 # 'html' assumes the file is HTML and just copies it
 COMPILERS = {
-    "rest": ['.rst', '.txt'],
     "markdown": ['.md', '.mdown', '.markdown'],
-    "textile": ['.textile'],
-    "txt2tags": ['.t2t'],
-    "bbcode": ['.bb'],
-    "wiki": ['.wiki'],
     "ipynb": ['.ipynb'],
+    "rest": ['.rst'],
     "html": ['.html', '.htm'],
-    # PHP files are rendered the usual way (i.e. with the full templates).
-    # The resulting files have .php extensions, making it possible to run
-    # them without reconfiguring your server to recognize them.
-    "php": ['.php'],
     # Pandoc detects the input from the source filename
     # but is disabled by default as it would conflict
     # with many of the others.
@@ -344,7 +335,7 @@ COMPILERS = {
 # "YAML": YAML wrapped in "---"
 # "TOML": TOML wrapped in "+++"
 # "Pelican": Native markdown metadata or reST docinfo fields. Nikola style for other formats.
-# METADATA_FORMAT = "Nikola"
+METADATA_FORMAT = "YAML"
 
 # Use date-based path when creating posts?
 # Can be enabled on a per-post basis with `nikola new_post -d`.
@@ -364,7 +355,7 @@ COMPILERS = {
 # Nikola supports logo display.  If you have one, you can put the URL here.
 # Final output is <img src="LOGO_URL" id="logo" alt="BLOG_TITLE">.
 # The URL may be relative to the site root.
-# LOGO_URL = ''
+# LOGO_URL = '/images/logo.png'
 
 # When linking posts to social media, Nikola provides Open Graph metadata
 # which is used to show a nice preview. This includes an image preview
@@ -580,7 +571,7 @@ HIDDEN_AUTHORS = ['Guest']
 # Final location for the main blog page and sibling paginated pages is
 # output / TRANSLATION[lang] / INDEX_PATH / index-*.html
 # (translatable)
-# INDEX_PATH = ""
+INDEX_PATH = "posts"
 
 # Optional HTML that displayed on “main” blog index.html files.
 # May be used for a greeting. (translatable)
@@ -931,6 +922,10 @@ IMAGE_FOLDERS = {'images': 'images'}
 #
 # CODE_COLOR_SCHEME = 'default'
 
+FAVICONS = (
+    ("icon", "/images/luerl.png", "128x128"),
+)
+
 # FAVICONS contains (name, file, size) tuples.
 # Used to create favicon link like this:
 # <link rel="name" href="file" sizes="size"/>
@@ -983,7 +978,61 @@ LICENSE = ""
 
 # A small copyright notice for the page footer (in HTML).
 # (translatable)
-CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         {license}'
+CONTENT_FOOTER = '''
+
+
+
+<footer class="footer-20192">
+
+      <div class="site-section">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col-sm">
+              <h5><a href="/#zerg" class="footer-logo">Luerl</a></h5>
+              <p class="copyright">
+                <small>&copy; {date}</small>
+              </p>
+            </div>
+            <div class="col-sm">
+              <h5>Capabilities</h5>
+              <ul class="list-unstyled links">
+                <li><a href="/install/">Install</a></li>
+                <li><a href="/docs/">Documentation</a></li>
+              </ul>
+            </div>
+            <div class="col-sm">
+              <h5>Cases</h5>
+              <ul class="list-unstyled links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="#">Cases</a></li>
+              </ul>
+            </div>
+            <div class="col-sm">
+              <h5>Further Information</h5>
+              <ul class="list-unstyled links">
+                <li><a href="#">Wiki</a></li>
+                <li><a href="#">Examples</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>Community</h5>
+                <ul class="list-unstyled links">
+                <li><a href="#">Slack</a></li>
+                <li><a href="#">Discord</a></li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </footer>
+'''
+
+OLD_FOOTER = '''
+<center>
+&copy; {date}         <a href="mailto:{email}">{author}</a>         {license}</center>'''
 
 # Things that will be passed to CONTENT_FOOTER.format().  This is done
 # for translatability, as dicts are not formattable.  Nikola will
@@ -1012,14 +1061,13 @@ CONTENT_FOOTER_FORMATS = {
 
 # A simple copyright tag for inclusion in RSS feeds that works just
 # like CONTENT_FOOTER and CONTENT_FOOTER_FORMATS
-RSS_COPYRIGHT = 'Contents © {date} <a href="mailto:{email}">{author}</a> {license}'
-RSS_COPYRIGHT_PLAIN = 'Contents © {date} {author} {license}'
+RSS_COPYRIGHT = '<center>© {date} <a href="mailto:{email}">{author}</a> {license}</center>'
+RSS_COPYRIGHT_PLAIN = '© {date} {author} {license}'
 RSS_COPYRIGHT_FORMATS = CONTENT_FOOTER_FORMATS
 
 # To use comments, you can choose between different third party comment
 # systems.  The following comment systems are supported by Nikola:
-#   disqus, discourse, facebook, intensedebate, isso, muut, commento,
-#   utterances
+#   disqus, facebook, intensedebate, isso, muut, commento, utterances
 # You can leave this option blank to disable comments.
 COMMENT_SYSTEM = ""
 # And you also need to add your COMMENT_SYSTEM_ID which
@@ -1132,9 +1180,8 @@ PRETTY_URLS = True
 MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.extra']
 
 # Options to be passed to markdown extensions (See https://python-markdown.github.io/reference/)
-# Default is {DEFAULT_LANG: {}} (no config at all)
-# (translatable)
-# MARKDOWN_EXTENSION_CONFIGS = {DEFAULT_LANG: {}}
+# Default is {} (no config at all)
+# MARKDOWN_EXTENSION_CONFIGS = {}
 
 
 # Extra options to pass to the pandoc command, empty by default.
@@ -1171,10 +1218,10 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # """
 
 # Show link to source for the posts?
-# SHOW_SOURCELINK = True
+SHOW_SOURCELINK = False 
 # Copy the source files for your pages?
 # Setting it to False implies SHOW_SOURCELINK = False
-# COPY_SOURCES = True
+COPY_SOURCES = False 
 
 # Modify the number of Post per Index Page
 # Defaults to 10
@@ -1241,7 +1288,7 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # <input type="text" name="q" class="form-control" placeholder="Search">
 # </div>
 # <button type="submit" class="btn btn-primary">
-# 	<span class="glyphicon glyphicon-search"></span>
+#   <span class="glyphicon glyphicon-search"></span>
 # </button>
 # <input type="hidden" name="sitesearch" value="%s">
 # </form>
@@ -1265,12 +1312,20 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # Extra things you want in the pages HEAD tag. This will be added right
 # before </head>
 # (translatable)
-# EXTRA_HEAD_DATA = ""
+EXTRA_HEAD_DATA = """
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<!-- Style CSS -->
+<!-- link rel="stylesheet" href="/css/style.css">
+"""
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).
 # (translatable)
-# BODY_END = ""
+BODY_END = '''
 
+'''
 # The possibility to extract metadata from the filename by using a
 # regular expression.
 # To make it work you need to name parts of your regular expression.
@@ -1347,7 +1402,7 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # Bundle JS and CSS into single files to make site loading faster in a HTTP/1.1
 # environment but is not recommended for HTTP/2.0 when caching is used.
 # Defaults to True.
-# USE_BUNDLES = True
+USE_BUNDLES = True
 
 # Plugins you don't want to use. Be careful :-)
 # DISABLED_PLUGINS = ["render_galleries"]
