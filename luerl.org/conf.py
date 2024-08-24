@@ -148,8 +148,8 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 # (Bootstrap 4: right-side of navbar, Bootblog 4: right side of title)
 NAVIGATION_ALT_LINKS = {
     DEFAULT_LANG: (
-        ("/posts/", "Blog"),
-        ("https://github.com/rvirding/luerl", "Try Luerl"),
+        ("/posts/", "News"),
+        ("https://try-luerl-rough-dust-6901.fly.dev/", "Try Luerl"),
     ),
 }
 
@@ -990,37 +990,37 @@ CONTENT_FOOTER = '''
           <div class="row">
 
             <div class="col-sm">
-              <h5><a href="/#zerg" class="footer-logo">Luerl</a></h5>
+              <h5><a href="/" class="footer-logo">Luerl</a></h5>
               <p class="copyright">
                 <small>&copy; {date}</small>
               </p>
             </div>
             <div class="col-sm">
-              <h5>Capabilities</h5>
+              <h5>Documentation</h5>
               <ul class="list-unstyled links">
                 <li><a href="/install/">Install</a></li>
-                <li><a href="/docs/">Documentation</a></li>
+                <li><a href="/docs/">API</a></li>
               </ul>
             </div>
             <div class="col-sm">
               <h5>Cases</h5>
               <ul class="list-unstyled links">
                 <li><a href="/about/">About</a></li>
-                <li><a href="#">Cases</a></li>
+                <li><a href="/cases/">Cases</a></li>
               </ul>
             </div>
             <div class="col-sm">
               <h5>Further Information</h5>
               <ul class="list-unstyled links">
-                <li><a href="#">Wiki</a></li>
-                <li><a href="#">Examples</a></li>
+                <li><a href="https://github.com/rvirding/luerl/wiki">Wiki</a></li>
+                <li><a href="https://github.com/rvirding/luerl/tree/develop/examples">Examples</a></li>
               </ul>
             </div>
             <div class="col-md-3">
                 <h5>Community</h5>
                 <ul class="list-unstyled links">
-                <li><a href="#">Slack</a></li>
-                <li><a href="#">Discord</a></li>
+                <li><a href="https://luerl.slack.com/">Slack</a></li>
+                <li><a href="https://discord.gg/V9jyB6DRMS">Discord</a></li>
               </ul>
             </div>
             
